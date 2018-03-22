@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 	private int selectedZombiePosition = 0;
+	public Text scoreText;
+	private int score = 0;
 
 	public GameObject selectedZombie;
 	public List<GameObject> zombies;
@@ -15,6 +18,7 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		SelectZombie (selectedZombie);	
+		scoreText.text = "Score: " + score;
 	}
 	
 	// Update is called once per frame
@@ -60,7 +64,12 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void PushUp() {
-		Rigidbody rb = selectedZombie.GetComponents<Rigidbody> ();
+		Rigidbody rb = selectedZombie.GetComponent<Rigidbody> ();
 		rb.AddForce (0,0,10, ForceMode.Impulse);
+	}
+
+	public void AddPoint() {
+		score = score + 1;
+		scoreText.text = "Score: " + score;
 	}
 }
